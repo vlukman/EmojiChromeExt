@@ -1,0 +1,27 @@
+{
+  "name": "Hello Extensions",
+  "description" : "Base Level Extension",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Gives a set of suggested Japanese Emoticons based on current mood."
+    }
+  },
+  "content_scripts": [
+    {
+        "matches": [ "http://*/*", "https://*/*"],
+        "js":["js/jquery-3.3.1.min.js", "js/clipboard.min.js", "js/script.js"],
+        "css": ["css/style.css"],
+        "run_at": "document_end"
+    }
+  ]
+}
