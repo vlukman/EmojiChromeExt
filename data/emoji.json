@@ -1,0 +1,93 @@
+{
+  "Feelings" : {
+    "Positive" : {
+      "Excited" : [],
+      "Happy" : [],
+      "Love" : [],
+      "Triumph & Success" : []
+    },
+    "Neutral" : {
+      "Confused" : [],
+      "Crazy" : [],
+      "Hungry" : [],
+      "Meh" : [],
+      "Shy" : [],
+      "Smug" : [],
+      "Surprised" : []
+    },
+    "Negative" : {
+      "Angry" : [],
+      "Hurt or Sick" : [],
+      "Sad" : [],
+      "Scared" : [],
+      "Worried" : []
+    }
+  },
+  "Animals" : {
+    "Pets" : {
+      "Birds" : [],
+      "Cats" : [],
+      "Dogs" : [],
+      "Pigs" : [],
+      "Rabits" : [],
+      "Sheep" : []
+    },
+    "Wild Animals" : {
+      "Bears" : [],
+      "Fish & Sea Creatures" : [],
+      "Monkeys" : []
+    },
+    "Others" : []
+  },
+  "Actions" : {
+    "Fun" : {
+      "Dancing" : [],
+      "Hugging" : [],
+      "Kissing" : [],
+      "Laughing" : [],
+      "Music" : [],
+      "Sleeping" : [],
+      "Sports" : []
+    },
+    "Neutral" : {
+      "Flexing" : [],
+      "Running" : [],
+      "Saluting" : [],
+      "Thinking" : [],
+      "Waiving" : [],
+      "Winking" : [],
+      "Writing" : []
+    },
+    "Less Fun" : {
+      "Apologizing" : [],
+      "Crying" : [],
+      "Fighting / Weapons" : [],
+      "Giving Up" : [],
+      "Hiding" : []
+    },
+    "Table Flipping" : [],
+    "Others" : []
+  },
+  "Misc" : {
+    "Some Misc" : {
+      "Characters & Memes" : [],
+      "Clouds" : [],
+      "Dead" : [],
+      "Evil" : [],
+      "Food & Drink" : [],
+      "Friends" : [],
+      "Holidays" : [],
+      "Magic" : []
+    },
+    "More Misc" : {
+      "Mustache" : [],
+      "Nose Bleed" : [],
+      "Objects & Props" : [],
+      "Random" : [],
+      "Sunglasses" : [],
+      "Words" : [],
+      "WTF" : []
+    },
+    "Others" : []
+  }
+}
