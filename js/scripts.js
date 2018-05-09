@@ -1,8 +1,22 @@
-var clipboard = new ClipboardJS('.emo-btn', {
-  text: function(trigger) {
-    return trigger.innerText;
-  }
-});
+var excitedJson = [
+      "(((o(*ﾟ▽ﾟ*)o)))",
+      "o((*^▽^*))o",
+      "Ｏ(≧▽≦)Ｏ",
+      "o(〃＾▽＾〃)o",
+      "o(^▽^)o",
+      "Ｏ(≧∇≦)Ｏ",
+      "o(≧∇≦o)",
+      "σ(≧ε≦ｏ)",
+      "o(*^▽^*)o",
+      "⌒°(❛ᴗ❛)°⌒",
+      "o(^∀^*)o",
+      "o(^◇^)o",
+      "《《o(≧◇≦)o》》",
+      "o(*≧□≦)o",
+      "o(*>ω<*)o"
+    ];
+
+var clipboard = new ClipboardJS('.emo-btn');
 
 $('.toggle').click(function(e) {
 	e.preventDefault();
@@ -29,4 +43,13 @@ $('.emo-btn').click(function(e) {
       btn.text(text);
     }, 500);
   });
+});
+
+$(document).ready(function() {
+  var mainAccordion = $('#main-accordion');
+  if (mainAccordion) {
+    console.log( "ready!" );
+    var testContent = createEmojiSectionDOM("Excited", [excitedJson]);
+    mainAccordion.append(testContent);
+  }
 });
