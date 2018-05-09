@@ -19,7 +19,7 @@
   "content_scripts": [
     {
         "matches": [ "http://*/*", "https://*/*"],
-        "js":["js/jquery-3.3.1.min.js", "js/clipboard.min.js", "js/script.js"],
+        "js":["js/jquery-3.3.1.min.js", "js/clipboard.min.js", "js/scripts.js"],
         "css": ["css/style.css"],
         "run_at": "document_end"
     }
