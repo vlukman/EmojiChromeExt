@@ -37,9 +37,6 @@ ul .inner {
 .emolist {
   padding:0.5em;
 }
-ul .inner.show {
-  /*display: block;*/
-}
 ul li {
   margin: 0;
 }
