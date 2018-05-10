@@ -1,9 +1,6 @@
-function createContainerDOM() {
-  var toggleObject = document.createElement('li');
-  return toggleObject;
-}
-
-function createSectionHeaderDOM(headerName) {
+// Returns a section header DOM object. This object
+// should be added into a container DOM object.
+function createToggleHeaderDOM(headerName) {
   var sectionObject = document.createElement('a');
   sectionObject.className = "toggle";
   sectionObject.href = "#";
@@ -11,13 +8,33 @@ function createSectionHeaderDOM(headerName) {
   return sectionObject;
 }
 
-function createSectionContentDOM() {
+// Returns a collapsible content DOM object.
+function createCollapsibleContentDOM() {
   var innerObject = document.createElement('ul');
   innerObject.className = 'inner';
   return innerObject;
 }
 
-function createEmojiDOM(emoji) {
+// Returns a DOM table object containing a list of 
+// emoji buttons.
+function createEmojiListDOM(emojiList) {
+  var tableObject = document.createElement('table');
+  tableObject.className = 'emo-table';
+  
+  jQuery.each(emojiList, function(index, emoji) {
+    var tableButton = createEmojiButtonDOM(emoji);
+    var tableColumn = document.createElement('tr');
+    tableColumn.append(tableButton);
+    tableObject.append(tableColumn);
+  });
+  
+  return tableObject;
+}
+
+// Returns a DOM object that contains a single emoji
+// button. Click the emoji button to copy the emoji
+// to clipboard.
+function createEmojiButtonDOM(emoji) {
   var emojiButton = document.createElement('button');
   emojiButton.className = 'emo-btn';
   emojiButton.innerText = emoji;
@@ -30,33 +47,48 @@ function createEmojiDOM(emoji) {
   return emojiObject;
 }
 
-function createEmojiListDOM(emojiList) {
-  var tableObject = document.createElement('table');
-  tableObject.className = 'emo-table';
+// Returns a DOM object that presents data in |contentData|.
+// For each key value pair in |contentData|, the method will
+// create a toggleable |headerName| DOM object, with they key
+// as the header name, and collapsible  content DOM object. 
+//
+// If the value is a list, then the content DOM will be a
+// table containing a list of emojis. 
+// If the value is a key-value pair, then the method will
+// show the content as a collapsible DOM object.
+function createDOMWithHeaderAndContent(headerName, 
+                                       contentData) {
+  var contentDOM = null;
+  if (Array.isArray(contentData)) {
+    // If contentData is a list, assume that we have
+    // a list of emojis.
+    contentDOM = createEmojiListDOM(contentData); 
+  }
+  else {
+    // We are dealing with a dictionary. Generate
+    // DOM recursively.
+    for(var key in contentData) {
+      contentDOM = createDOMWithHeaderAndContent
+                              (key, contentData[key]);
+    }
+  }
   
-  jQuery.each(emojiList, function(index, emoji) {
-    var tableRow = createEmojiDOM(emoji);
-    var tableColumn = document.createElement('tr');
-    tableColumn.append(tableRow);
-    tableObject.append(tableColumn);
-  });
-  
-  return tableObject;
-}
+  var collapsibleDOM = createCollapsibleContentDOM();
+  collapsibleDOM.append(contentDOM);
 
-// TODO(vlukman): we are currently assuming that contentData is always a list
-// Take care of the case when contentData is a dictionary.
-function createEmojiSectionDOM(headerName, contentData) {
-  var emojiListDOM = createEmojiListDOM(contentData);
-  
-  var contentDOM = createSectionContentDOM();
-  contentDOM.append(emojiListDOM);
+  var headerDOM = createToggleHeaderDOM(headerName);
 
-  var headerDOM = createSectionHeaderDOM(headerName);
-
-  var containerDOM = createContainerDOM();
+  var containerDOM = document.createElement('li');
   containerDOM.append(headerDOM);
-  containerDOM.append(contentDOM);
+  containerDOM.append(collapsibleDOM);
   
   return containerDOM;
+}
+
+// TODO(vlukman): We don't want to have the "emoji" as
+// a top level category. Instead we want to show the 
+// categories in json['emoji'].
+// Returns a DOM object that presents data in |json|.
+function createDOMWithJson(json) {
+  return createDOMWithHeaderAndContent("emoji", json);
 }

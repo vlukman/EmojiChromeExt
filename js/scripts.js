@@ -1,4 +1,6 @@
-var excitedJson = [
+
+var json = {
+  "Excited" : [
       "(((o(*ﾟ▽ﾟ*)o)))",
       "o((*^▽^*))o",
       "Ｏ(≧▽≦)Ｏ",
@@ -14,7 +16,8 @@ var excitedJson = [
       "《《o(≧◇≦)o》》",
       "o(*≧□≦)o",
       "o(*>ω<*)o"
-    ];
+    ]
+}
 
 function setupCopyButtonBehavior() {
   var clipboard = new ClipboardJS('.emo-btn', {
@@ -59,7 +62,7 @@ function setupSectionToggleBehavior() {
 $(document).ready(function() {
   var mainAccordion = $('#main-accordion');
   if (mainAccordion) {
-    var testContent = createEmojiSectionDOM("Excited", excitedJson);
+    var testContent = createDOMWithJson(json);
     mainAccordion.append(testContent);
     setupSectionToggleBehavior();
     setupCopyButtonBehavior();
