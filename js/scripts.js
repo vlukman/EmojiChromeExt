@@ -16,11 +16,15 @@ var excitedJson = [
       "o(*>ω<*)o"
     ];
 
-
-// TODO(vlukman): This method does not properly
-// setup the copy button behavior.
 function setupCopyButtonBehavior() {
-  var clipboard = new ClipboardJS('.emo-btn');
+  var clipboard = new ClipboardJS('.emo-btn', {
+    text : function(trigger) {
+      // |emoji| is a custom variable that is set
+      // when the HTML object is auto-generated.
+      // See createEmojiDOM() method.
+      return trigger.emoji;
+    }
+  });
   
   $('.emo-btn').click(function(e) {
    	var btn = $(this);
@@ -55,7 +59,6 @@ function setupSectionToggleBehavior() {
 $(document).ready(function() {
   var mainAccordion = $('#main-accordion');
   if (mainAccordion) {
-    console.log( "ready!" );
     var testContent = createEmojiSectionDOM("Excited", excitedJson);
     mainAccordion.append(testContent);
     setupSectionToggleBehavior();

@@ -21,7 +21,7 @@ function createEmojiDOM(emoji) {
   var emojiButton = document.createElement('button');
   emojiButton.className = 'emo-btn';
   emojiButton.innerText = emoji;
-  emojiButton['data-clipboard-text'] = emoji;
+  emojiButton.emoji = emoji;
   
   var emojiObject = document.createElement('td');
   emojiObject.className = 'emolist';
