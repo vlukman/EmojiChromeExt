@@ -47,17 +47,22 @@ function createEmojiButtonDOM(emoji) {
   return emojiObject;
 }
 
+// |collapsible| indicates if |contentData| should be
+// presented in a collapsible content DOM, with |headerName|
+// as a toggleable header section.
+//
 // Returns a DOM object that presents data in |contentData|.
 // For each key value pair in |contentData|, the method will
 // create a toggleable |headerName| DOM object, with they key
-// as the header name, and collapsible  content DOM object. 
+// as the header name, and collapsible content DOM object. 
 //
 // If the value is a list, then the content DOM will be a
 // table containing a list of emojis. 
 // If the value is a key-value pair, then the method will
 // show the content as a collapsible DOM object.
 function createDOMWithHeaderAndContent(headerName, 
-                                       contentData) {
+                                       contentData,
+                                       collapsible) {
   var contentDOM = null;
   if (Array.isArray(contentData)) {
     // If contentData is a list, assume that we have
@@ -69,20 +74,25 @@ function createDOMWithHeaderAndContent(headerName,
     // DOM recursively.
     for(var key in contentData) {
       contentDOM = createDOMWithHeaderAndContent
-                              (key, contentData[key]);
+                          (key, contentData[key], true);
     }
   }
   
-  var collapsibleDOM = createCollapsibleContentDOM();
-  collapsibleDOM.append(contentDOM);
+  if (collapsible) {
+    var collapsibleDOM = createCollapsibleContentDOM();
+    collapsibleDOM.append(contentDOM);
 
-  var headerDOM = createToggleHeaderDOM(headerName);
+    var headerDOM = createToggleHeaderDOM(headerName);
 
-  var containerDOM = document.createElement('li');
-  containerDOM.append(headerDOM);
-  containerDOM.append(collapsibleDOM);
+    var containerDOM = document.createElement('li');
+    containerDOM.append(headerDOM);
+    containerDOM.append(collapsibleDOM);
   
-  return containerDOM;
+    return containerDOM;    
+  }
+  else {
+    return contentDOM;
+  }
 }
 
 // TODO(vlukman): We don't want to have the "emoji" as
@@ -90,5 +100,5 @@ function createDOMWithHeaderAndContent(headerName,
 // categories in json['emoji'].
 // Returns a DOM object that presents data in |json|.
 function createDOMWithJson(json) {
-  return createDOMWithHeaderAndContent("emoji", json);
+  return createDOMWithHeaderAndContent("", json, false);
 }
