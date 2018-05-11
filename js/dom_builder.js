@@ -1,3 +1,5 @@
+const kEmojiButtonsInEachRow = 3;
+
 // Returns a section header DOM object. This object
 // should be added into a container DOM object.
 function createToggleHeaderDOM(headerName) {
@@ -21,11 +23,14 @@ function createEmojiListDOM(emojiList) {
   var tableObject = document.createElement('table');
   tableObject.className = 'emo-table';
   
+  var tableColumn = null;
   jQuery.each(emojiList, function(index, emoji) {
+    if (index % kEmojiButtonsInEachRow == 0) {
+      tableColumn = document.createElement('tr');
+      tableObject.append(tableColumn);
+    }
     var tableButton = createEmojiButtonDOM(emoji);
-    var tableColumn = document.createElement('tr');
     tableColumn.append(tableButton);
-    tableObject.append(tableColumn);
   });
   
   return tableObject;
