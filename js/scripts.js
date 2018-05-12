@@ -1,23 +1,4 @@
-
-var json = {
-  "Excited" : [
-      "(((o(*ﾟ▽ﾟ*)o)))",
-      "o((*^▽^*))o",
-      "Ｏ(≧▽≦)Ｏ",
-      "o(〃＾▽＾〃)o",
-      "o(^▽^)o",
-      "Ｏ(≧∇≦)Ｏ",
-      "o(≧∇≦o)",
-      "σ(≧ε≦ｏ)",
-      "o(*^▽^*)o",
-      "⌒°(❛ᴗ❛)°⌒",
-      "o(^∀^*)o",
-      "o(^◇^)o",
-      "《《o(≧◇≦)o》》",
-      "o(*≧□≦)o",
-      "o(*>ω<*)o"
-    ]
-}
+var kEmojiJsonUrl = "https://raw.githubusercontent.com/vlukman/EmojiChromeExt/master/data/emoji.json";
 
 function setupCopyButtonBehavior() {
   var clipboard = new ClipboardJS('.emo-btn', {
@@ -60,11 +41,14 @@ function setupSectionToggleBehavior() {
 }
 
 $(document).ready(function() {
-  var mainAccordion = $('#main-accordion');
-  if (mainAccordion) {
-    var testContent = createDOMWithJson(json);
-    mainAccordion.append(testContent);
-    setupSectionToggleBehavior();
-    setupCopyButtonBehavior();
-  }
+  $.getJSON(kEmojiJsonUrl, function(emojiJson) {
+    var mainAccordion = $('#main-accordion');
+    if (emojiJson == null || mainAccordion == null) return;
+    if (mainAccordion) {
+      var testContent = createDOMWithJson(emojiJson);
+      mainAccordion.append(testContent);
+      setupSectionToggleBehavior();
+      setupCopyButtonBehavior();
+    }
+  });
 });

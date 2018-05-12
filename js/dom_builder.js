@@ -68,36 +68,38 @@ function createEmojiButtonDOM(emoji) {
 function createDOMWithHeaderAndContent(headerName, 
                                        contentData,
                                        collapsible) {
-  var contentDOM = null;
+  var containerDOM = document.createElement('li');
+  var contentCollectionDOM = null;
+  if (collapsible) {
+    var headerDOM = createToggleHeaderDOM(headerName);
+    containerDOM.append(headerDOM);
+    
+    var collapsibleDOM = createCollapsibleContentDOM();
+    containerDOM.append(collapsibleDOM);
+    
+    contentCollectionDOM = collapsibleDOM;
+  }
+  else {
+    contentCollectionDOM = containerDOM;
+  }
+  
   if (Array.isArray(contentData)) {
     // If contentData is a list, assume that we have
     // a list of emojis.
-    contentDOM = createEmojiListDOM(contentData); 
+    var contentDOM = createEmojiListDOM(contentData);
+    contentCollectionDOM.append(contentDOM);
   }
   else {
     // We are dealing with a dictionary. Generate
     // DOM recursively.
     for(var key in contentData) {
-      contentDOM = createDOMWithHeaderAndContent
+      var contentDOM = createDOMWithHeaderAndContent
                           (key, contentData[key], true);
+      contentCollectionDOM.append(contentDOM);
     }
   }
-  
-  if (collapsible) {
-    var collapsibleDOM = createCollapsibleContentDOM();
-    collapsibleDOM.append(contentDOM);
 
-    var headerDOM = createToggleHeaderDOM(headerName);
-
-    var containerDOM = document.createElement('li');
-    containerDOM.append(headerDOM);
-    containerDOM.append(collapsibleDOM);
-  
-    return containerDOM;    
-  }
-  else {
-    return contentDOM;
-  }
+  return containerDOM;
 }
 
 // TODO(vlukman): We don't want to have the "emoji" as
